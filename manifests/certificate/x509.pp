@@ -131,11 +131,7 @@ define openssl::certificate::x509(
   $_csr = pick($csr, "${_csr_dir}/${name}.csr")
   $_key = pick($key, "${_key_dir}/${name}.key")
 
-  if !empty($altnames+$extkeyusage) {
-    $req_ext = true
-  } else {
-    $req_ext = false
-  }
+  $req_ext = !empty($altnames+$extkeyusage) {
 
   file { $_cnf:
     ensure  => $ensure,
